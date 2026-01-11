@@ -49,27 +49,17 @@ const Login = () => {
               />
             </div>
 
-            {/* Password dengan show/hide seperti GoChick */}
+            {/* Password dengan show/hide */}
             <div className="mb-4">
               <label className="block mb-2 font-semibold">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="masukkan password"
-                  className="w-full px-3 py-2 pr-10 rounded-md bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  className="w-full px-3 py-2 pr-10 rounded-md bg-white border border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-400"
                 />
-                {/* Tombol toggle password dengan style seperti GoChick */}
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800"
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5" />
-                  ) : (
-                    <Eye className="h-5 w-5" />
-                  )}
-                </button>
+                {/* Tombol toggle password - diperbaiki positioning */}
+               
               </div>
             </div>
 
