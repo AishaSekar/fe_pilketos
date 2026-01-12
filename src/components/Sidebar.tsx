@@ -22,9 +22,9 @@ const Sidebar: React.FC<SidebarProps> = ({ activeMenu, setActiveMenu }) => {
     { icon: Home, label: 'Dashboard', path: '/dashboard' },
     { icon: Users, label: 'Data Pemilih', path: '/data-pemilih' },
     { icon: UserCircle, label: 'Kandidat', path: '/kandidat' },
+    { icon: Settings, label: 'Pengaturan', path: '/pengaturan' },
     { icon: BarChart3, label: 'Monitoring', path: '/monitoring' },
     { icon: FileText, label: 'Laporan', path: '/laporan' },
-    { icon: Settings, label: 'Pengaturan', path: '/pengaturan' },
   ]
 
   return (
