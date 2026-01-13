@@ -8,7 +8,7 @@ import Pengaturan from './pages/admin/pengaturan'
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/Login" />} />
+      <Route path="/" element={<Navigate to="/dashboard" />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/data-pemilih" element={<DataPemilih />} />
       <Route path="/kandidat" element={<Kandidat/>} />

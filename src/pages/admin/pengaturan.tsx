@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Save } from 'lucide-react'
+import { Save, Info } from 'lucide-react'
 import Sidebar from '../../components/Sidebar'
 import Header from '../../components/Header'
 
@@ -28,11 +28,10 @@ const Pengaturan = () => {
 
       {/* KONTEN */}
       <div className="flex-1 flex flex-col">
-        {/* HEADER */}
         <Header />
 
-        {/* ISI HALAMAN */}
         <div className="p-8">
+          {/* JUDUL */}
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-gray-800 mb-2">
               Pengaturan Pemilihan
@@ -43,13 +42,14 @@ const Pengaturan = () => {
           </div>
 
           <div className="grid grid-cols-3 gap-8">
-            {/* FORM PENGATURAN */}
+            {/* FORM */}
             <div className="col-span-2 bg-white rounded-3xl p-8 shadow-lg">
               <h2 className="text-2xl font-bold text-gray-800 mb-6">
                 Pengaturan Waktu
               </h2>
 
               <div className="space-y-6">
+                {/* TANGGAL & JAM MULAI */}
                 <div className="grid grid-cols-2 gap-6">
                   <div>
                     <label className="block mb-2 font-medium">
@@ -76,6 +76,7 @@ const Pengaturan = () => {
                   </div>
                 </div>
 
+                {/* TANGGAL & JAM SELESAI */}
                 <div className="grid grid-cols-2 gap-6">
                   <div>
                     <label className="block mb-2 font-medium">
@@ -102,17 +103,27 @@ const Pengaturan = () => {
                   </div>
                 </div>
 
-                {/* STATUS */}
+                {/* STATUS PEMILIHAN */}
                 <div className="flex justify-between items-center bg-gray-50 p-4 rounded-xl">
-                  <span>Status Pemilihan</span>
+                  <div className="flex flex-col">
+                    <span className="font-medium">Status Pemilihan</span>
+                    <span className="text-sm text-gray-400">
+                      {statusPemilihan
+                        ? 'Voting sedang berlangsung'
+                        : 'Voting belum dimulai'}
+                    </span>
+                  </div>
+
                   <button
-                    onClick={() => setStatusPemilihan(!statusPemilihan)}
+                    onClick={() => setStatusPemilihan((prev) => !prev)}
                     className={`w-16 h-8 rounded-full relative transition ${
-                      statusPemilihan ? 'bg-orange-400' : 'bg-gray-300'
+                      statusPemilihan
+                        ? 'bg-orange-400'
+                        : 'bg-gray-300'
                     }`}
                   >
                     <span
-                      className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition ${
+                      className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform duration-300 ${
                         statusPemilihan ? 'translate-x-8' : ''
                       }`}
                     />
@@ -130,18 +141,25 @@ const Pengaturan = () => {
               </div>
             </div>
 
-            {/* STATUS SAAT INI */}
+            {/* STATUS + INFORMASI */}
             <div className="space-y-6">
+              {/* STATUS SAAT INI */}
               <div className="bg-white rounded-3xl p-6 shadow-lg">
-                <h3 className="font-bold text-xl mb-4">Status Saat Ini</h3>
-                <div className="bg-green-50 p-4 rounded-xl border">
-                  <div className="text-sm text-gray-500">Status</div>
-                  <div className="text-2xl font-bold">
-                    {currentStatus.status}
+                <h3 className="font-bold text-xl mb-6">
+                  Status Saat Ini
+                </h3>
+
+                <div className="flex items-center justify-between bg-orange-100 border border-orange-400 rounded-2xl p-4">
+                  <div>
+                    <div className="text-sm text-gray-500">Status</div>
+                    <div className="text-2xl font-bold">
+                      {currentStatus.status}
+                    </div>
                   </div>
+                  <span className="w-5 h-5 rounded-full bg-green-500" />
                 </div>
 
-                <div className="bg-blue-50 p-4 rounded-xl border mt-4">
+                <div className="bg-gray-100 rounded-2xl p-4 mt-4">
                   <div className="text-sm text-gray-500">
                     Periode Pemilihan
                   </div>
@@ -150,7 +168,35 @@ const Pengaturan = () => {
                   </div>
                 </div>
               </div>
+
+              {/* INFORMASI */}
+              <div className="bg-blue-50 border border-blue-400 rounded-3xl p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-blue-400 text-white rounded-full p-2">
+                    <Info size={20} />
+                  </div>
+                  <h4 className="font-bold text-lg">
+                    Informasi
+                  </h4>
+                </div>
+
+                <ul className="list-disc list-inside text-gray-700 space-y-2">
+                  <li>
+                    Aktifkan pemilihan saat voting sudah siap dimulai
+                  </li>
+                  <li>
+                    Pastikan tanggal dan waktu sudah sesuai
+                  </li>
+                  <li>
+                    Siswa hanya bisa voting saat status aktif
+                  </li>
+                  <li>
+                    Nonaktifkan pemilihan setelah periode voting selesai
+                  </li>
+                </ul>
+              </div>
             </div>
+            {/* END RIGHT SIDE */}
           </div>
         </div>
       </div>
