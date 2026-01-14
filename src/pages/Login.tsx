@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import "../index.css";
-
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,10 +14,9 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify({
-          username: username,
-          password: password,
+          username,
+          password,
         }),
       });
 
@@ -29,10 +27,18 @@ const Login = () => {
         return;
       }
 
+      // SIMPAN TOKEN & ROLE
       localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role);
 
       alert("Login sukses");
-      window.location.href = "/admin/dashboard";
+
+      // REDIRECT BERDASARKAN ROLE
+      if (data.role === "admin") {
+        window.location.href = "/admin/dashboard";
+      } else {
+        window.location.href = "/user/dashboard";
+      }
     } catch (err) {
       alert("Backend Go tidak jalan / tidak bisa diakses");
     }
@@ -40,7 +46,7 @@ const Login = () => {
 
   return (
     <div className="w-screen h-screen relative overflow-hidden bg-[#F6AB36]">
-      {/* Background Logo */}
+      {/* Background */}
       <div
         className="absolute inset-0 bg-no-repeat bg-center opacity-60 animate-bg"
         style={{
@@ -49,10 +55,10 @@ const Login = () => {
         }}
       />
 
-      {/* Container utama */}
+      {/* Container */}
       <div className="relative z-10 w-full h-full flex flex-col md:flex-row items-center justify-center">
-        {/* KIRI */}
-        <div className="md:w-1/2 w-full flex flex-col justify-center px-6 md:px-14 text-[#B45309]"></div>
+        {/* KIRI (kosong, aman) */}
+        <div className="md:w-1/2 w-full flex flex-col justify-center px-6 md:px-14 text-[#B45309]" />
 
         {/* KANAN */}
         <div className="md:w-1/2 w-full flex items-center justify-center animate-fadeInUp">
@@ -84,7 +90,6 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-3 py-2 pr-10 rounded-md bg-white border border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-400"
                 />
-
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}

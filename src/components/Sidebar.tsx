@@ -19,18 +19,24 @@ const Sidebar: React.FC<SidebarProps> = ({ activeMenu, setActiveMenu }) => {
   const navigate = useNavigate()
 
   const menuItems = [
-    { icon: Home, label: 'Dashboard', path: '/dashboard' },
-    { icon: Users, label: 'Data Pemilih', path: '/data-pemilih' },
-    { icon: UserCircle, label: 'Kandidat', path: '/kandidat' },
-    { icon: Settings, label: 'Pengaturan', path: '/pengaturan' },
-    { icon: BarChart3, label: 'Monitoring', path: '/monitoring' },
-    { icon: FileText, label: 'Laporan', path: '/laporan' },
+    { icon: Home, label: 'Dashboard', path: '/admin/dashboard' },
+    { icon: Users, label: 'Data Pemilih', path: '/admin/data-pemilih' },
+    { icon: UserCircle, label: 'Kandidat', path: '/admin/kandidat' },
+    { icon: Settings, label: 'Pengaturan', path: '/admin/pengaturan' },
+    { icon: BarChart3, label: 'Monitoring', path: '/admin/monitoring' },
+    { icon: FileText, label: 'Laporan', path: '/admin/laporan' },
   ]
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('role')
+    navigate('/login', { replace: true })
+  }
 
   return (
     <div className="w-72 bg-gradient-to-b from-[#F6AB36] to-[#f59e1b] text-white flex flex-col shadow-2xl">
 
-      {/* LOGO SEKOLAH (AMAN, TIDAK DIHAPUS) */}
+      {/* LOGO */}
       <div className="p-6 flex justify-center">
         <div className="w-20 h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center">
           <img
@@ -69,7 +75,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeMenu, setActiveMenu }) => {
       </nav>
 
       {/* LOGOUT */}
-      <button className="m-4 flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-white/20 transition">
+      <button
+        onClick={handleLogout}
+        className="m-4 flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-white/20 transition"
+      >
         <LogOut size={22} />
         <span className="font-semibold">Logout</span>
       </button>
